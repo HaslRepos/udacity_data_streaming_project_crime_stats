@@ -57,8 +57,7 @@ def run_spark_job(spark):
     # TODO select original_crime_type_name and disposition
     print("Create distinct_table")
     distinct_table = service_table \
-        .select(psf.col('original_crime_type_name'), psf.col('disposition'), \
-                psf.to_timestamp(psf.col("call_date_time")).alias("call_date_time"))
+        .select(psf.col('original_crime_type_name'), psf.col('disposition'), psf.to_timestamp(psf.col("call_date_time")).alias("call_date_time"))
 
     distinct_table.printSchema()
 
@@ -67,8 +66,7 @@ def run_spark_job(spark):
     agg_df = distinct_table\
         .select(psf.col("original_crime_type_name"), psf.col("call_date_time"), psf.col("disposition")) \
         .withWatermark("call_date_time", "60 minutes") \
-        .groupBy(psf.window(distinct_table.call_date_time, "10 minutes", "5 minutes"),
-                 psf.col("original_crime_type_name")) \
+        .groupBy(psf.window(distinct_table.call_date_time, "10 minutes", "5 minutes"), psf.col("original_crime_type_name")) \
         .count()
 
     # TODO Q1. Submit a screen shot of a batch ingestion of the aggregation
