@@ -45,8 +45,8 @@ Starting the Spark Streaming process:
 
 Kafka Spark Structured Streaming application UI screenshot:
 
-![spark-ui](spark-ui_1.jpg)
-![spark-ui](spark-ui_2.jpg)
+![spark-ui](spark_ui_1.jpg)
+![spark-ui](spark_ui_2.jpg)
 
 ## Questions to be answered
 
